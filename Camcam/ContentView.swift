@@ -1,24 +1,26 @@
-//
-//  ContentView.swift
-//  Camcam
-//
-//  Created by Ilya Fomenko on 05/08/2024.
-//
-
+// ContentView.swift
 import SwiftUI
+import UIKit
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+        CameraViewControllerWrapper()
+            .edgesIgnoringSafeArea(.all)
     }
 }
 
-#Preview {
-    ContentView()
+struct CameraViewControllerWrapper: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> CameraViewController {
+        return CameraViewController()
+    }
+
+    func updateUIViewController(_ uiViewController: CameraViewController, context: Context) {
+        // Update the view controller if needed
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
 }

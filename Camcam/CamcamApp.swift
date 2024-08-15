@@ -1,14 +1,8 @@
-//
-//  CamcamApp.swift
-//  Camcam
-//
-//  Created by Ilya Fomenko on 05/08/2024.
-//
-
+// CameraApp.swift
 import SwiftUI
 
 @main
-struct CamcamApp: App {
+struct CameraApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
