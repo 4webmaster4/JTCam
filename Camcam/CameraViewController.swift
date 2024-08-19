@@ -15,6 +15,8 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate, AVC
     let focusValueLabel = UILabel() // Label to display the focus value
     let isoValueLabel = UILabel() // Label to display the ISO value
     let exposureValueLabel = UILabel() // Label to display the exposure value
+    let recordVideoButton = UIButton()
+        
 
 
 
@@ -27,7 +29,10 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate, AVC
     
     func setupCamera() {
         captureSession = AVCaptureSession()
-        captureSession.sessionPreset = .inputPriority
+//        captureSession.sessionPreset = .inputPriority
+        
+        // Set the session preset to high quality
+        captureSession.sessionPreset = .high
         
         guard let backCamera = AVCaptureDevice.default(for: AVMediaType.video) else {
             print("Unable to access back camera!")
@@ -61,26 +66,20 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate, AVC
             
             // Set the initial ISO value
             let desiredISO: Float = captureDevice.activeFormat.minISO
-            if captureDevice.iso >= captureDevice.activeFormat.minISO && captureDevice.iso <= captureDevice.activeFormat.maxISO {
-                captureDevice.setExposureModeCustom(duration: captureDevice.exposureDuration, iso: desiredISO, completionHandler: nil)
+            if desiredISO >= captureDevice.activeFormat.minISO && desiredISO <= captureDevice.activeFormat.maxISO {
+                // Set the initial exposure duration to 2 ms (0.002 seconds)
+                let initialExposureDurationSeconds = 0.002
+                let minExposureDurationSeconds = CMTimeGetSeconds(captureDevice.activeFormat.minExposureDuration)
+                let maxExposureDurationSeconds = CMTimeGetSeconds(captureDevice.activeFormat.maxExposureDuration)
+                
+                if initialExposureDurationSeconds >= minExposureDurationSeconds && initialExposureDurationSeconds <= maxExposureDurationSeconds {
+                    let initialExposureDuration = CMTimeMakeWithSeconds(initialExposureDurationSeconds, preferredTimescale: 1000*1000*1000)
+                    captureDevice.setExposureModeCustom(duration: initialExposureDuration, iso: desiredISO, completionHandler: nil)
+                }
             }
             
-            // Set the initial exposure duration to 2 ms
-            let initialExposureDurationSeconds = 0.002
-            let minExposureDurationSeconds = CMTimeGetSeconds(captureDevice.activeFormat.minExposureDuration)
-            let maxExposureDurationSeconds = CMTimeGetSeconds(captureDevice.activeFormat.maxExposureDuration)
-
-            if initialExposureDurationSeconds >= minExposureDurationSeconds && initialExposureDurationSeconds <= maxExposureDurationSeconds {
-                let initialExposureDuration = CMTimeMakeWithSeconds(initialExposureDurationSeconds, preferredTimescale: 1000*1000*1000)
-                captureDevice.setExposureModeCustom(duration: initialExposureDuration, iso: desiredISO, completionHandler: nil)
-            }
-            
-//            // Ensure slider reflects the initial exposure duration
-//            exposureSlider.minimumValue = Float(minExposureDurationSeconds)
-//            exposureSlider.maximumValue = Float(maxExposureDurationSeconds)
-//            exposureSlider.value = Float(initialExposureDurationSeconds)
-
             captureDevice.unlockForConfiguration()
+            
             // Start running the session on a background thread
             DispatchQueue.global(qos: .userInitiated).async { [weak self] in
                 self?.captureSession.startRunning()
@@ -105,12 +104,11 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate, AVC
     }
     
     func setupSliders() {
-
         // ISO Slider Setup
         isoSlider.frame = CGRect(x: 20, y: 150, width: 280, height: 40)
         isoSlider.minimumValue = captureDevice.activeFormat.minISO
         isoSlider.maximumValue = captureDevice.activeFormat.maxISO
-        isoSlider.value = captureDevice.activeFormat.minISO
+        isoSlider.value = captureDevice.iso // Current ISO value
         view.addSubview(isoSlider)
         isoValueLabel.frame = CGRect(x: 310, y: 150, width: 60, height: 40)
         isoValueLabel.textAlignment = .left
@@ -119,17 +117,17 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate, AVC
         
         // Exposure Slider Setup
         exposureSlider.frame = CGRect(x: 20, y: 200, width: 280, height: 40)
-        let minExposureDurationSeconds = CMTimeGetSeconds(captureDevice.activeFormat.minExposureDuration)
-        let maxExposureDurationSeconds = CMTimeGetSeconds(captureDevice.activeFormat.maxExposureDuration)
+        let minExposureDurationSeconds = CMTimeGetSeconds(captureDevice.activeFormat.minExposureDuration)+0.0001
+        let maxExposureDurationSeconds = CMTimeGetSeconds(captureDevice.activeFormat.maxExposureDuration)/200
 
-        exposureSlider.minimumValue = Float(minExposureDurationSeconds)+0.0001
-        exposureSlider.maximumValue = Float(maxExposureDurationSeconds)/200
-        exposureSlider.value = 0.002 // or any default value within the range
+        exposureSlider.minimumValue = Float(minExposureDurationSeconds)
+        exposureSlider.maximumValue = Float(maxExposureDurationSeconds)
+        exposureSlider.value = 0.002 // Initial exposure duration set to 2 ms
         view.addSubview(exposureSlider)
         
-        exposureValueLabel.frame = CGRect(x: 310, y: 200, width: 60, height: 40)
+        exposureValueLabel.frame = CGRect(x: 310, y: 200, width: 100, height: 40)
         exposureValueLabel.textAlignment = .left
-        exposureValueLabel.text = String(format: "%.2f", exposureSlider.value)
+        exposureValueLabel.text = String(format: "%.2f ms", exposureSlider.value * 1000) // Display in ms
         view.addSubview(exposureValueLabel)
         
         // Focus Slider Setup
@@ -144,29 +142,36 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate, AVC
         focusValueLabel.text = String(format: "%.2f", focusSlider.value)
         view.addSubview(focusValueLabel)
         
-
-
-        
-
-        
         focusSlider.addTarget(self, action: #selector(focusChanged(_:)), for: .valueChanged)
         isoSlider.addTarget(self, action: #selector(isoChanged(_:)), for: .valueChanged)
         exposureSlider.addTarget(self, action: #selector(exposureChanged(_:)), for: .valueChanged)
-                
+        
         let capturePhotoButton = UIButton(frame: CGRect(x: 20, y: 250, width: 100, height: 50))
         capturePhotoButton.setTitle("Photo", for: .normal)
         capturePhotoButton.backgroundColor = .red
         capturePhotoButton.addTarget(self, action: #selector(capturePhoto), for: .touchUpInside)
         view.addSubview(capturePhotoButton)
         
-        let recordVideoButton = UIButton(frame: CGRect(x: 140, y: 250, width: 100, height: 50))
-        recordVideoButton.setTitle("Record", for: .normal)
+        // Record Video Button Setup
+        recordVideoButton.frame = CGRect(x: 140, y: 250, width: 100, height: 50)
+        recordVideoButton.setTitle("Video", for: .normal)
         recordVideoButton.backgroundColor = .blue
         recordVideoButton.addTarget(self, action: #selector(startRecording), for: .touchUpInside)
         view.addSubview(recordVideoButton)
+
+    }
+
+    @objc func exposureChanged(_ sender: UISlider) {
+        let exposureDurationSeconds = Double(sender.value)
+        let exposureDuration = CMTimeMakeWithSeconds(exposureDurationSeconds, preferredTimescale: 1000*1000*1000)
         
+        try? captureDevice.lockForConfiguration()
+        captureDevice.setExposureModeCustom(duration: exposureDuration, iso: captureDevice.iso, completionHandler: nil)
+        captureDevice.unlockForConfiguration()
 
-
+        // Display the exposure duration in milliseconds for better readability
+        let durationInMilliseconds = exposureDurationSeconds * 1000.0
+        exposureValueLabel.text = String(format: "%.2f ms", durationInMilliseconds)
     }
     
     @objc func focusChanged(_ sender: UISlider) {
@@ -191,21 +196,6 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate, AVC
         // Update the ISO value label with the current value of the slider
         isoValueLabel.text = String(format: "%.0f", sender.value)
     }
-
-    @objc func exposureChanged(_ sender: UISlider) {
-        let exposureDurationSeconds = Double(sender.value)
-        let exposureDuration = CMTimeMakeWithSeconds(exposureDurationSeconds, preferredTimescale: 1000*1000*1000)
-        
-        try? captureDevice.lockForConfiguration()
-        captureDevice.setExposureModeCustom(duration: exposureDuration, iso: captureDevice.iso, completionHandler: nil)
-        captureDevice.unlockForConfiguration()
-
-        // Display the exposure duration in a more readable format
-        let durationInMilliseconds = exposureDurationSeconds * 1000.0
-        exposureValueLabel.text = String(format: "%.2f ms", durationInMilliseconds)
-    }
-
-
 
     
     @objc func capturePhoto() {
@@ -235,11 +225,21 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate, AVC
                 let outputURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(uniqueFileName)
                 // Start recording to the unique file path
                 movieOutput.startRecording(to: outputURL, recordingDelegate: self)
+                
+                // Update button to show "Recording" and change color to green
+                recordVideoButton.setTitle("Recording", for: .normal)
+                recordVideoButton.backgroundColor = .green
             }
-            } else {
+        } else {
             movieOutput.stopRecording()
+            
+            // Revert button to initial state after stopping recording
+            recordVideoButton.setTitle("Video", for: .normal)
+            recordVideoButton.backgroundColor = .blue
         }
     }
+
+
 
     // AVCapturePhotoCaptureDelegate
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
