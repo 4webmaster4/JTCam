@@ -1,7 +1,9 @@
 import UIKit
 import AVFoundation
 
-class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate, AVCaptureFileOutputRecordingDelegate {
+class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate,
+
+    AVCaptureFileOutputRecordingDelegate {
 
     var captureSession: AVCaptureSession!
     var videoPreviewLayer: AVCaptureVideoPreviewLayer!
@@ -16,6 +18,8 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate, AVC
     let isoValueLabel = UILabel() // Label to display the ISO value
     let exposureValueLabel = UILabel() // Label to display the exposure value
     let recordVideoButton = UIButton()
+
+    
         
 
 
@@ -29,7 +33,6 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate, AVC
     
     func setupCamera() {
         captureSession = AVCaptureSession()
-//        captureSession.sessionPreset = .inputPriority
         
         // Set the session preset to high quality
         captureSession.sessionPreset = .high
@@ -51,10 +54,13 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate, AVC
             captureSession.addOutput(movieOutput)
             
             videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+            // Rotate the videoPreviewLayer by 180 degrees
+            videoPreviewLayer.setAffineTransform(CGAffineTransform(rotationAngle: -.pi/2))
             videoPreviewLayer.videoGravity = .resizeAspectFill
             videoPreviewLayer.frame = view.layer.bounds
             view.layer.addSublayer(videoPreviewLayer)
             
+
             configureDeviceFor4K()
             
             // Turn off autofocus and set the initial focus to 0.5
@@ -104,19 +110,41 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate, AVC
     }
     
     func setupSliders() {
+        let screenWidth = UIScreen.main.bounds.width
+//        let screenHeight = UIScreen.main.bounds.height
+        let sliderWidth = 280
+        let sliderHeight = 40
+        let sliderSpacer = 60
+        let isoLabel = UILabel()
+        let exposureLabel = UILabel()
+        let focusLabel = UILabel()
+        let sliderXposition = Int(screenWidth) - sliderWidth - sliderSpacer
+        let valueXposition = Int(screenWidth) - sliderSpacer
+        let labelXposition = Int(screenWidth) - sliderWidth - sliderSpacer - 30
+        let isoY = 50
+        let exposureY = 90
+        let focusY = 130
+        let buttonsY = 200
+
+
         // ISO Slider Setup
-        isoSlider.frame = CGRect(x: 20, y: 150, width: 280, height: 40)
+        isoSlider.frame = CGRect(x: sliderXposition, y: isoY, width: sliderWidth, height: sliderHeight)
         isoSlider.minimumValue = captureDevice.activeFormat.minISO
         isoSlider.maximumValue = captureDevice.activeFormat.maxISO
         isoSlider.value = captureDevice.iso // Current ISO value
         view.addSubview(isoSlider)
-        isoValueLabel.frame = CGRect(x: 310, y: 150, width: 60, height: 40)
+        isoLabel.frame = CGRect(x: labelXposition, y: isoY, width: 60, height: 40)
+        isoLabel.textAlignment = .left
+        isoLabel.text = "ISO"
+        view.addSubview(isoLabel)
+        isoValueLabel.frame = CGRect(x: valueXposition, y: isoY, width: 60, height: 40)
         isoValueLabel.textAlignment = .left
         isoValueLabel.text = String(format: "%.0f", isoSlider.value)
         view.addSubview(isoValueLabel)
+
         
         // Exposure Slider Setup
-        exposureSlider.frame = CGRect(x: 20, y: 200, width: 280, height: 40)
+        exposureSlider.frame = CGRect(x: sliderXposition, y: exposureY, width: 280, height: sliderHeight)
         let minExposureDurationSeconds = CMTimeGetSeconds(captureDevice.activeFormat.minExposureDuration)+0.0001
         let maxExposureDurationSeconds = CMTimeGetSeconds(captureDevice.activeFormat.maxExposureDuration)/200
 
@@ -125,19 +153,30 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate, AVC
         exposureSlider.value = 0.002 // Initial exposure duration set to 2 ms
         view.addSubview(exposureSlider)
         
-        exposureValueLabel.frame = CGRect(x: 310, y: 200, width: 100, height: 40)
+        exposureLabel.frame = CGRect(x: labelXposition, y: exposureY, width: 100, height: 40)
+        exposureLabel.textAlignment = .left
+        exposureLabel.text = "Exposure"
+        view.addSubview(exposureLabel)
+        
+        exposureValueLabel.frame = CGRect(x: valueXposition, y: exposureY, width: 100, height: 40)
         exposureValueLabel.textAlignment = .left
         exposureValueLabel.text = String(format: "%.2f ms", exposureSlider.value * 1000) // Display in ms
         view.addSubview(exposureValueLabel)
         
         // Focus Slider Setup
-        focusSlider.frame = CGRect(x: 20, y: 100, width: 280, height: 40)
+        focusSlider.frame = CGRect(x: sliderXposition, y: focusY, width: 280, height: 40)
         focusSlider.minimumValue = 0.0
         focusSlider.maximumValue = 1.0
         focusSlider.value = 0.5
         view.addSubview(focusSlider)
+
+        focusLabel.frame = CGRect(x: labelXposition, y: focusY, width: 100, height: 40)
+        focusLabel.textAlignment = .left
+        focusLabel.text = "Focus"
+        view.addSubview(focusLabel)
+
         // Configure and position the focus value label
-        focusValueLabel.frame = CGRect(x: 310, y: 100, width: 60, height: 40)
+        focusValueLabel.frame = CGRect(x: valueXposition, y: focusY, width: 60, height: 40)
         focusValueLabel.textAlignment = .left
         focusValueLabel.text = String(format: "%.2f", focusSlider.value)
         view.addSubview(focusValueLabel)
@@ -146,14 +185,14 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate, AVC
         isoSlider.addTarget(self, action: #selector(isoChanged(_:)), for: .valueChanged)
         exposureSlider.addTarget(self, action: #selector(exposureChanged(_:)), for: .valueChanged)
         
-        let capturePhotoButton = UIButton(frame: CGRect(x: 20, y: 250, width: 100, height: 50))
+        let capturePhotoButton = UIButton(frame: CGRect(x: Int(screenWidth) - 120, y: buttonsY, width: 100, height: 50))
         capturePhotoButton.setTitle("Photo", for: .normal)
         capturePhotoButton.backgroundColor = .red
         capturePhotoButton.addTarget(self, action: #selector(capturePhoto), for: .touchUpInside)
         view.addSubview(capturePhotoButton)
         
         // Record Video Button Setup
-        recordVideoButton.frame = CGRect(x: 140, y: 250, width: 100, height: 50)
+        recordVideoButton.frame = CGRect(x: Int(screenWidth) - 240, y: buttonsY, width: 100, height: 50)
         recordVideoButton.setTitle("Video", for: .normal)
         recordVideoButton.backgroundColor = .blue
         recordVideoButton.addTarget(self, action: #selector(startRecording), for: .touchUpInside)
@@ -216,6 +255,7 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate, AVC
     @objc func startRecording() {
         if !movieOutput.isRecording {
             if let videoConnection = movieOutput.connection(with: .video) {
+                videoConnection.videoRotationAngle = 0 // Rotate the video to landscape right
                 // Disable video stabilization
                 if videoConnection.isVideoStabilizationSupported {
                     videoConnection.preferredVideoStabilizationMode = .off
@@ -243,9 +283,13 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate, AVC
 
     // AVCapturePhotoCaptureDelegate
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
-        if let imageData = photo.fileDataRepresentation() {
-            let image = UIImage(data: imageData)
-            UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
+        if let imageData = photo.fileDataRepresentation(), let originalImage = UIImage(data: imageData) {
+            
+            // Create a new image with the desired orientation
+            let rotatedImage = UIImage(cgImage: originalImage.cgImage!, scale: 1.0, orientation: .up) // Adjust orientation here
+            
+            // Save the rotated image to the photo album
+            UIImageWriteToSavedPhotosAlbum(rotatedImage, nil, nil, nil)
         }
     }
     
