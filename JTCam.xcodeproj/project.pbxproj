@@ -30,9 +30,9 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		127016FD2C60E6450032090F /* Camcam */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Camcam; sourceTree = "<group>"; };
-		1270170E2C60E6460032090F /* CamcamTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = CamcamTests; sourceTree = "<group>"; };
-		127017182C60E6460032090F /* CamcamUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = CamcamUITests; sourceTree = "<group>"; };
+		127016FD2C60E6450032090F /* JTCam */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = JTCam; sourceTree = "<group>"; };
+		1270170E2C60E6460032090F /* JTCamTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = JTCamTests; sourceTree = "<group>"; };
+		127017182C60E6460032090F /* JTCamUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = JTCamUITests; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,9 +63,9 @@
 		127016F22C60E6450032090F = {
 			isa = PBXGroup;
 			children = (
-				127016FD2C60E6450032090F /* Camcam */,
-				1270170E2C60E6460032090F /* CamcamTests */,
-				127017182C60E6460032090F /* CamcamUITests */,
+				127016FD2C60E6450032090F /* JTCam */,
+				1270170E2C60E6460032090F /* JTCamTests */,
+				127017182C60E6460032090F /* JTCamUITests */,
 				127016FC2C60E6450032090F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -96,7 +96,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				127016FD2C60E6450032090F /* Camcam */,
+				127016FD2C60E6450032090F /* JTCam */,
 			);
 			name = JTCam;
 			packageProductDependencies = (
@@ -119,7 +119,7 @@
 				1270170D2C60E6460032090F /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				1270170E2C60E6460032090F /* CamcamTests */,
+				1270170E2C60E6460032090F /* JTCamTests */,
 			);
 			name = JTCamTests;
 			packageProductDependencies = (
@@ -142,7 +142,7 @@
 				127017172C60E6460032090F /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				127017182C60E6460032090F /* CamcamUITests */,
+				127017182C60E6460032090F /* JTCamUITests */,
 			);
 			name = JTCamUITests;
 			packageProductDependencies = (
@@ -384,7 +384,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Camcam/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"JTCam/Preview Content\"";
 				DEVELOPMENT_TEAM = KCRHSC928B;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -418,7 +418,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Camcam/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"JTCam/Preview Content\"";
 				DEVELOPMENT_TEAM = KCRHSC928B;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;

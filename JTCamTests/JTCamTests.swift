@@ -6,7 +6,7 @@
 //
 
 import Testing
-@testable import Camcam
+@testable import JTCam
 
 struct CamcamTests {
 
