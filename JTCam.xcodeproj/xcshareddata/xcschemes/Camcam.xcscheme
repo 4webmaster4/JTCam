@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "127016FA2C60E6450032090F"
-               BuildableName = "Camcam.app"
-               BlueprintName = "Camcam"
-               ReferencedContainer = "container:Camcam.xcodeproj">
+               BuildableName = "JTCam.app"
+               BlueprintName = "JTCam"
+               ReferencedContainer = "container:JTCam.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -36,9 +36,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1270170A2C60E6460032090F"
-               BuildableName = "CamcamTests.xctest"
-               BlueprintName = "CamcamTests"
-               ReferencedContainer = "container:Camcam.xcodeproj">
+               BuildableName = "JTCamTests.xctest"
+               BlueprintName = "JTCamTests"
+               ReferencedContainer = "container:JTCam.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "127017142C60E6460032090F"
-               BuildableName = "CamcamUITests.xctest"
-               BlueprintName = "CamcamUITests"
-               ReferencedContainer = "container:Camcam.xcodeproj">
+               BuildableName = "JTCamUITests.xctest"
+               BlueprintName = "JTCamUITests"
+               ReferencedContainer = "container:JTCam.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -69,9 +69,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "127016FA2C60E6450032090F"
-            BuildableName = "Camcam.app"
-            BlueprintName = "Camcam"
-            ReferencedContainer = "container:Camcam.xcodeproj">
+            BuildableName = "JTCam.app"
+            BlueprintName = "JTCam"
+            ReferencedContainer = "container:JTCam.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -86,9 +86,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "127016FA2C60E6450032090F"
-            BuildableName = "Camcam.app"
-            BlueprintName = "Camcam"
-            ReferencedContainer = "container:Camcam.xcodeproj">
+            BuildableName = "JTCam.app"
+            BlueprintName = "JTCam"
+            ReferencedContainer = "container:JTCam.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

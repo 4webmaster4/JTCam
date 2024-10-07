@@ -20,15 +20,12 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate,
     let recordVideoButton = UIButton()
 
     
-        
-
-
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupCamera()
         setupSliders()
+        addGridOverlay()
     }
     
     func setupCamera() {
@@ -199,6 +196,38 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate,
         view.addSubview(recordVideoButton)
 
     }
+
+        
+    // Function to add grid overlay
+    func addGridOverlay() {
+        let gridLayer = CAShapeLayer()
+        let path = UIBezierPath()
+        
+        let numberOfLines = 2 // For a 3x3 grid, we need 2 lines horizontally and 2 vertically
+        let screenWidth = UIScreen.main.bounds.width
+        let screenHeight = UIScreen.main.bounds.height
+        
+        // Draw vertical lines
+        for i in 1...numberOfLines {
+            let x = CGFloat(i) * (screenWidth / CGFloat(numberOfLines + 1))
+            path.move(to: CGPoint(x: x, y: 0))
+            path.addLine(to: CGPoint(x: x, y: screenHeight))
+        }
+        
+        // Draw horizontal lines
+        for i in 1...numberOfLines {
+            let y = CGFloat(i) * (screenHeight / CGFloat(numberOfLines + 1))
+            path.move(to: CGPoint(x: 0, y: y))
+            path.addLine(to: CGPoint(x: screenWidth, y: y))
+        }
+        
+        gridLayer.path = path.cgPath
+        gridLayer.strokeColor = UIColor.white.withAlphaComponent(0.2).cgColor // Light white color with some transparency
+        gridLayer.lineWidth = 1.0
+        
+        view.layer.addSublayer(gridLayer)
+    }
+        
 
     @objc func exposureChanged(_ sender: UISlider) {
         let exposureDurationSeconds = Double(sender.value)

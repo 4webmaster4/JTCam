@@ -24,9 +24,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		127016FB2C60E6450032090F /* Camcam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Camcam.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		1270170B2C60E6460032090F /* CamcamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CamcamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		127017152C60E6460032090F /* CamcamUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CamcamUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		127016FB2C60E6450032090F /* JTCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JTCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1270170B2C60E6460032090F /* JTCamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JTCamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		127017152C60E6460032090F /* JTCamUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JTCamUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -73,9 +73,9 @@
 		127016FC2C60E6450032090F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				127016FB2C60E6450032090F /* Camcam.app */,
-				1270170B2C60E6460032090F /* CamcamTests.xctest */,
-				127017152C60E6460032090F /* CamcamUITests.xctest */,
+				127016FB2C60E6450032090F /* JTCam.app */,
+				1270170B2C60E6460032090F /* JTCamTests.xctest */,
+				127017152C60E6460032090F /* JTCamUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -83,9 +83,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		127016FA2C60E6450032090F /* Camcam */ = {
+		127016FA2C60E6450032090F /* JTCam */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1270171F2C60E6460032090F /* Build configuration list for PBXNativeTarget "Camcam" */;
+			buildConfigurationList = 1270171F2C60E6460032090F /* Build configuration list for PBXNativeTarget "JTCam" */;
 			buildPhases = (
 				127016F72C60E6450032090F /* Sources */,
 				127016F82C60E6450032090F /* Frameworks */,
@@ -98,16 +98,16 @@
 			fileSystemSynchronizedGroups = (
 				127016FD2C60E6450032090F /* Camcam */,
 			);
-			name = Camcam;
+			name = JTCam;
 			packageProductDependencies = (
 			);
 			productName = Camcam;
-			productReference = 127016FB2C60E6450032090F /* Camcam.app */;
+			productReference = 127016FB2C60E6450032090F /* JTCam.app */;
 			productType = "com.apple.product-type.application";
 		};
-		1270170A2C60E6460032090F /* CamcamTests */ = {
+		1270170A2C60E6460032090F /* JTCamTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 127017222C60E6460032090F /* Build configuration list for PBXNativeTarget "CamcamTests" */;
+			buildConfigurationList = 127017222C60E6460032090F /* Build configuration list for PBXNativeTarget "JTCamTests" */;
 			buildPhases = (
 				127017072C60E6460032090F /* Sources */,
 				127017082C60E6460032090F /* Frameworks */,
@@ -121,16 +121,16 @@
 			fileSystemSynchronizedGroups = (
 				1270170E2C60E6460032090F /* CamcamTests */,
 			);
-			name = CamcamTests;
+			name = JTCamTests;
 			packageProductDependencies = (
 			);
 			productName = CamcamTests;
-			productReference = 1270170B2C60E6460032090F /* CamcamTests.xctest */;
+			productReference = 1270170B2C60E6460032090F /* JTCamTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		127017142C60E6460032090F /* CamcamUITests */ = {
+		127017142C60E6460032090F /* JTCamUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 127017252C60E6460032090F /* Build configuration list for PBXNativeTarget "CamcamUITests" */;
+			buildConfigurationList = 127017252C60E6460032090F /* Build configuration list for PBXNativeTarget "JTCamUITests" */;
 			buildPhases = (
 				127017112C60E6460032090F /* Sources */,
 				127017122C60E6460032090F /* Frameworks */,
@@ -144,11 +144,11 @@
 			fileSystemSynchronizedGroups = (
 				127017182C60E6460032090F /* CamcamUITests */,
 			);
-			name = CamcamUITests;
+			name = JTCamUITests;
 			packageProductDependencies = (
 			);
 			productName = CamcamUITests;
-			productReference = 127017152C60E6460032090F /* CamcamUITests.xctest */;
+			productReference = 127017152C60E6460032090F /* JTCamUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -174,7 +174,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 127016F62C60E6450032090F /* Build configuration list for PBXProject "Camcam" */;
+			buildConfigurationList = 127016F62C60E6450032090F /* Build configuration list for PBXProject "JTCam" */;
 			compatibilityVersion = "Xcode 15.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -187,9 +187,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				127016FA2C60E6450032090F /* Camcam */,
-				1270170A2C60E6460032090F /* CamcamTests */,
-				127017142C60E6460032090F /* CamcamUITests */,
+				127016FA2C60E6450032090F /* JTCam */,
+				1270170A2C60E6460032090F /* JTCamTests */,
+				127017142C60E6460032090F /* JTCamUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -245,12 +245,12 @@
 /* Begin PBXTargetDependency section */
 		1270170D2C60E6460032090F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 127016FA2C60E6450032090F /* Camcam */;
+			target = 127016FA2C60E6450032090F /* JTCam */;
 			targetProxy = 1270170C2C60E6460032090F /* PBXContainerItemProxy */;
 		};
 		127017172C60E6460032090F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 127016FA2C60E6450032090F /* Camcam */;
+			target = 127016FA2C60E6450032090F /* JTCam */;
 			targetProxy = 127017162C60E6460032090F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -388,6 +388,10 @@
 				DEVELOPMENT_TEAM = KCRHSC928B;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.medical";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera for photo and video capture.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to your microphone to capture audio while recording video.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "We need access to your photo library to save captured photos and videos.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -399,7 +403,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = c.Camcam;
+				PRODUCT_BUNDLE_IDENTIFIER = c.Cam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -418,6 +422,10 @@
 				DEVELOPMENT_TEAM = KCRHSC928B;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.medical";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera for photo and video capture.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to your microphone to capture audio while recording video.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "We need access to your photo library to save captured photos and videos.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -429,7 +437,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = c.Camcam;
+				PRODUCT_BUNDLE_IDENTIFIER = c.Cam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -452,7 +460,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Camcam.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Camcam";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JTCam.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/JTCam";
 			};
 			name = Debug;
 		};
@@ -471,7 +479,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Camcam.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Camcam";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JTCam.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/JTCam";
 			};
 			name = Release;
 		};
@@ -512,7 +520,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		127016F62C60E6450032090F /* Build configuration list for PBXProject "Camcam" */ = {
+		127016F62C60E6450032090F /* Build configuration list for PBXProject "JTCam" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1270171D2C60E6460032090F /* Debug */,
@@ -521,7 +529,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1270171F2C60E6460032090F /* Build configuration list for PBXNativeTarget "Camcam" */ = {
+		1270171F2C60E6460032090F /* Build configuration list for PBXNativeTarget "JTCam" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				127017202C60E6460032090F /* Debug */,
@@ -530,7 +538,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		127017222C60E6460032090F /* Build configuration list for PBXNativeTarget "CamcamTests" */ = {
+		127017222C60E6460032090F /* Build configuration list for PBXNativeTarget "JTCamTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				127017232C60E6460032090F /* Debug */,
@@ -539,7 +547,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		127017252C60E6460032090F /* Build configuration list for PBXNativeTarget "CamcamUITests" */ = {
+		127017252C60E6460032090F /* Build configuration list for PBXNativeTarget "JTCamUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				127017262C60E6460032090F /* Debug */,
